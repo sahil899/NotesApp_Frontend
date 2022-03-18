@@ -1,0 +1,21 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav class="sidenavstyle mat-elevation-z15" [opened]="!smallSize" [mode]="smallSize?'over':'side'">
+        <mat-toolbar color="primary">
+            <!-- <mat-icon *ngIf="smallSize" (click)="sidenav.close()">close</mat-icon> -->
+
+            Notes
+        </mat-toolbar>
+        <mat-list role="list">
+            <mat-list-item role="listitem">Item 1</mat-list-item>
+            <mat-list-item role="listitem">Item 2</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    <!-- <mat-icon class="matIcon" (click)="sidenav.toggle()">menu</mat-icon> -->
+
+    <mat-sidenav-content>
+        <app-maincontent [collapsed]="smallSize" (menu)="sidenav.toggle() "></app-maincontent>
+    </mat-sidenav-content>
+
+
+</mat-sidenav-container>

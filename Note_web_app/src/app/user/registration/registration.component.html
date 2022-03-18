@@ -1,0 +1,83 @@
+<div class="signup-page">
+    <form class="signup-form" [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm)">
+        <!-- {{ signUpForm.value | json }} -->
+
+        <h1 class="heading">YourNotes</h1>
+        <p>Remember everything important</p>
+
+        <div formGroupName="name" class="name-field">
+            <input type="text" id="fname" placeholder="First Name" formControlName="firstName" />
+
+            <input type="text" placeholder="Last Name" formControlName="lastName" ngClass="(email.pristine?" />
+        </div>
+
+        <!-- errors text for first name -->
+        <div class="error"
+            *ngIf="name.get('firstName').invalid &&(name.get('firstName').dirty || name.get('firstName').touched)">
+            <div *ngIf="name.get('firstName').errors?.['required']">
+                Please enter your first name
+            </div>
+        </div>
+
+        <!-- error text for last name -->
+        <div class="error"
+            *ngIf="name.get('lastName').invalid &&(name.get('lastName').dirty || name.get('lastName').touched)">
+            <div *ngIf="name.get('lastName').errors?.['required']">
+                Please enter your last name
+            </div>
+        </div>
+
+        <input type="email" placeholder="Email" formControlName="email" />
+
+        <!-- errors text for email -->
+        <div class="error" *ngIf="email.invalid && (email.touched || email.dirty)">
+            <div *ngIf="email.errors?.['required']">Please Enter the Email</div>
+            <div *ngIf="email.errors?.['email']">Please Enter Valid Email</div>
+        </div>
+
+        <input type="password" placeholder="Password" formControlName="password" />
+
+        <!-- errors text for password -->
+        <div class="error" *ngIf="password.invalid && (password.touched || password.dirty)">
+            <div *ngIf="password.errors?.['required']">Please Enter the Password</div>
+            <div *ngIf="password.errors?.['minlength']">
+                Please Enter Password greater than 7 character
+            </div>
+        </div>
+
+
+        <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" />
+        <!-- error text for password confirm -->
+        <div class="error" *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+            <div *ngIf="confirmPassword.errors?.['required']">
+                Please enter confirm password
+            </div>
+            <div *ngIf="confirmPassword.errors?.['missmatch']">
+                password does not match
+            </div>
+        </div>
+        <button type="submit" [disabled]="signUpForm.invalid"
+            [ngStyle]="{'background-color':signUpForm.invalid?'grey':null}">Continue</button>
+        <div class="form-last">
+            <p>Already have an account?</p>
+            <a (click)="redirect()">Sign in</a>
+        </div>
+
+        <!-- for checking purpose -->
+        <!-- <div>
+            touched: {{ signUpForm.get("email").touched }} untouched :{{
+            signUpForm.get("email").untouched
+            }}
+            dirty:{{ signUpForm.get("email").dirty }} pristine:{{
+            signUpForm.get("email").pristine
+            }}
+            invalid:{{ signUpForm.get("email").invalid }} valid:{{
+            signUpForm.get("email").valid
+            }}
+            error:{{ signUpForm.get("email").error }}
+            }}
+
+            {{signUpForm.value | json}}
+        </div> -->
+    </form>
+</div>
