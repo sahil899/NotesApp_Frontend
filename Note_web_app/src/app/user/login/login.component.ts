@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       if (response.status == 200) {
         this.router.navigate(['/notes'])
       }
-      // console.log("inside subscibe:::::::::;" + response);
+      // console.log("inside subscibe:::::::::;" + response);;
     });
 
 

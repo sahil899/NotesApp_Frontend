@@ -12,5 +12,12 @@
   margin-right: 0.5rem;
 }
 
+a {
+  text-decoration: none;
+}
+a:hover {
+  background-color: rgba(128, 128, 128, 0.637);
+}
+
 @media screen and(max-width:720px) {
 }

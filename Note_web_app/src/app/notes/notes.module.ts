@@ -4,23 +4,35 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { MaincontentComponent } from './maincontent/maincontent.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
     path: '',
     component: SidenavComponent,
+    children: [{
+      path: ':id',
+      component: MaincontentComponent
+    }, {
+      path: '',
+      component: MaincontentComponent
+    }
+    ]
   },
 ];
 
 @NgModule({
   declarations: [
     SidenavComponent,
-    MaincontentComponent
+    MaincontentComponent,
+    ToolbarComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    AngularMaterialModule
+    AngularMaterialModule,
+    FormsModule
   ]
 })
 export class NotesModule { }

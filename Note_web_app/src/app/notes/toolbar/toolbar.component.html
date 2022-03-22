@@ -1,0 +1,8 @@
+<mat-toolbar class="menu-toolbar" color="primary">
+    <mat-toolbar-row>
+        <mat-icon *ngIf="collapsed" (click)="menu.emit()">menu</mat-icon>
+        <span>Your Notes</span>
+        <span class="spacer"></span>
+        <mat-icon>account_circle</mat-icon>
+    </mat-toolbar-row>
+</mat-toolbar>

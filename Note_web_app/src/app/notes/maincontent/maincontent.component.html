@@ -1,12 +1,54 @@
-<mat-toolbar class="menu-toolbar" color="primary">
-    <mat-toolbar-row>
-        <mat-icon *ngIf="collapsed" (click)="menu.emit()">menu</mat-icon>
-        <span>Your Notes</span>
-        <span class="spacer"></span>
-        <mat-icon>account_circle</mat-icon>
-    </mat-toolbar-row>
-</mat-toolbar>
 <div class="mat-elevation-z10 main-content">
-    main content
+    <!-- {{singleNoteData | json}} -->
+    <div *ngIf="!editOn">
+
+        <div class="notes-content">
+            <h1 class="notes-content-heading">{{singleNoteData.title}}</h1>
+            <h4>
+                <ng-container *ngIf="singleNoteData.new_note">
+                    Date of Creation:
+                </ng-container>
+                <ng-container *ngIf="!singleNoteData.new_note">
+                    Modified On:
+
+                </ng-container>
+                {{singleNoteData.date | date:'dd-mm-YYYY'}}
+            </h4>
+            <fieldset class="content-body">
+                <legend>Content</legend>
+                <p>
+                    {{singleNoteData.content}}
+                </p>
+            </fieldset>
+        </div>
+        <div class="btn-location" (click)="editNotes()">
+            <button mat-fab color="primary" class="btn-h" aria-label="Example icon button with a delete icon">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+
+    </div>
+    <div *ngIf="editOn">
+
+        <form #notesEditForm="ngForm" class="notes-form" (ngSubmit)="notesModify(notesEditForm)">
+            <!-- {{notesEditForm|json}} -->
+            <mat-form-field appearance="fill">
+                <mat-label>Title</mat-label>
+                <input matInput [(ngModel)]="title" name="title" #titleModel="ngModel" required>
+                <mat-error *ngIf="titleModel.invalid&&(titleModel.dirty || titleModel.touched)">Please enter title
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Content</mat-label>
+                <textarea matInput [(ngModel)]="content" name="content" #contentModel="ngModel" required></textarea>
+                <mat-error *ngIf="contentModel.invalid&&(contentModel.dirty || contentModel.touched)">content cannot be
+                    empty</mat-error>
+            </mat-form-field>
+
+            <button type="submit" [disabled]="notesEditForm.invalid" class="btn-submit">Submit</button>
+
+        </form>
+
+    </div>
 
 </div>
