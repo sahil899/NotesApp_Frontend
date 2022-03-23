@@ -11,3 +11,10 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.spinner-loader {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

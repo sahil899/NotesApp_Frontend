@@ -26,6 +26,7 @@ export class NotesService {
     }))
 
   }
+
   modifyNotes(body: any, noteid: string) {
     console.log("!!!!!!!!!!!body!!!!!!!!!!!!!!!!!", body)
     return this.http.patch(`${env.BASE_URL}/notes/${noteid}`, body, { observe: 'response' })
@@ -35,6 +36,10 @@ export class NotesService {
     //   return response
     // }
     // ))
+  }
+
+  postNotes(body: any) {
+    return this.http.post(`${env.BASE_URL}/notes`, body, { observe: 'response' });
   }
 
 }

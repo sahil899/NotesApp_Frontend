@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FormsModule } from '@angular/forms';
+import { CoreModule } from '../core/core.module';
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     AngularMaterialModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class NotesModule { }

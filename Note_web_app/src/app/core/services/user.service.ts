@@ -10,7 +10,7 @@ export class UserService {
 
 
   register(body: User) {
-    return this.http.post(`${env.BASE_URL}/user/signup`, body)
+    return this.http.post(`${env.BASE_URL}/user/signup`, body, { observe: 'response' })
   }
 
   // login(body: any): any {

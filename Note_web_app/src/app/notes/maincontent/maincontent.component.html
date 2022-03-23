@@ -1,6 +1,11 @@
 <div class="mat-elevation-z10 main-content">
     <!-- {{singleNoteData | json}} -->
-    <div *ngIf="!editOn">
+    <div *ngIf="dataNotLoaded">
+        {{singleNoteData.length}}
+        <mat-progress-spinner class="spinner-loader" mode='indeterminate' color='accent'></mat-progress-spinner>
+
+    </div>
+    <div *ngIf="!editOn && !dataNotLoaded">
 
         <div class="notes-content">
             <h1 class="notes-content-heading">{{singleNoteData.title}}</h1>
@@ -30,7 +35,8 @@
     </div>
     <div *ngIf="editOn">
 
-        <form #notesEditForm="ngForm" class="notes-form" (ngSubmit)="notesModify(notesEditForm)">
+        <form #notesEditForm="ngForm" class="notes-form"
+            (ngSubmit)="addNewNoteBoolean?newNoteFunction(notesEditForm):notesModify(notesEditForm)">
             <!-- {{notesEditForm|json}} -->
             <mat-form-field appearance="fill">
                 <mat-label>Title</mat-label>

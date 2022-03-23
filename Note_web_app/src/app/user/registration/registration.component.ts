@@ -61,8 +61,10 @@ export class RegistrationComponent implements OnInit {
       password: form.value.password
     }
     // console.log(this.newUser)
-    this.userService.register(this.newUser).subscribe((response) => {
-      console.log(response);
+    this.userService.register(this.newUser).subscribe((response: any) => {
+      if (response.status == 201) {
+        this.router.navigate(['/user/signin'])
+      }
     })
   }
 
