@@ -14,7 +14,15 @@
             </mat-toolbar>
             <mat-list role="list">
                 <ng-container *ngFor="let note of NotesData">
-                    <a mat-list-item role="listitem" routerLink='NS' [queryParams]="{'obj':note._id}">{{note.title}}</a>
+                    <div class="note-list">
+
+                        <a mat-list-item role="listitem" routerLink='NS' [queryParams]="{'obj':note._id}">{{note.title |
+                            truncate}}</a>
+                        <button mat-icon-button (click)="deleteNote(note._id)" class="del-button">
+                            <mat-icon color="warn">delete</mat-icon>
+                        </button>
+                    </div>
+
                 </ng-container>
                 <button mat-raised-button color="primary" class="add-notes-button" routerLink='NS'
                     [queryParams]="{'obj':'newNote'}">

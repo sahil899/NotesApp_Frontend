@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { NotesService } from 'src/app/core/services/notes.service';
 const BREAK_POINT = 720;
 @Component({
@@ -17,7 +18,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   NotesData: any = {}
   subcription$1: Subscription;
   activateSpinner: boolean = false;
-  constructor(private breakpoint: BreakpointObserver, private noteService: NotesService, private router: Router) { }
+  constructor(private breakpoint: BreakpointObserver, private noteService: NotesService, private router: Router, private alertService: AlertService) { }
 
   ngOnInit(): void {
     //  variable initialization
@@ -61,21 +62,24 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
     })
 
-    this.subcription$1 = this.noteService.getNotes().subscribe((res: any) => {
+    this.subcription$1 = this.noteService.getNotes().subscribe((response: any) => {
       this.activateSpinner = false;
-
+      console.log(":::::::sidenav", response);
       this.NotesData = [];
-      res.Notes.map((x: any) => {
+      response.Notes.map((x: any) => {
         this.NotesData.push(x);
       })
+      this.alertService.success(response.message);
 
     }, (err) => {
       console.log(err);
       if (err.status == 500) {
+        this.alertService.error(err.error.message);
         this.router.navigate(["user", "signin"]);
       }
       if (err.status == 400) {
         this.activateSpinner = false;
+        this.alertService.error(err.error.message);
         this.router.navigate(['notes', 'NS'], { queryParams: { 'obj': 'newNote' } });
 
       }
@@ -89,6 +93,27 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   //   this.router.navigate(['/notes'], { queryParams: { newNote: 1 }, skipLocationChange: true })
   // }
+
+  // delete notes function
+
+  deleteNote(noteid: string) {
+
+    this.noteService.deleteNote(noteid).subscribe((res: any) => {
+      console.log("response in delete function::::::::::::::::::::::", res);
+
+      for (let i = 0; i < this.NotesData.length; i++) {
+
+        if (this.NotesData[i]._id == noteid) {
+          this.NotesData.splice(i, 1);
+        }
+      }
+      this.alertService.success(res.body.message)
+      this.router.navigate(['notes', 'NS'], { queryParams: { 'obj': (this.NotesData.length ? this.NotesData.length[0] : 'newNote') } })
+
+    })
+
+
+  }
 
   ngOnDestroy(): void {
     this.subcription$1.unsubscribe();

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from '../../core/services/user.service';
 
@@ -11,7 +12,7 @@ import { UserService } from '../../core/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private authService: AuthService, private alertService: AlertService) { }
 
   signInForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -35,8 +36,11 @@ export class LoginComponent implements OnInit {
     this.authService.login(body).subscribe((response: any) => {
       if (response.status == 200) {
         this.router.navigate(['/notes'])
+        this.alertService.success(response.body.message);
       }
-      // console.log("inside subscibe:::::::::;" + response);;
+    }, (err) => {
+      this.alertService.error(err.error.message);
+
     });
 
 

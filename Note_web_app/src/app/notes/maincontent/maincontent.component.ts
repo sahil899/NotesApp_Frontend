@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { NotesService } from 'src/app/core/services/notes.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class MaincontentComponent implements OnInit, OnChanges {
 
 
 
-  constructor(private notesService: NotesService, private activateRoutes: ActivatedRoute, private router: Router) {
+  constructor(private notesService: NotesService, private activateRoutes: ActivatedRoute, private router: Router, private alertService: AlertService) {
     console.log("checking the in constructor")
 
 
@@ -107,11 +108,13 @@ export class MaincontentComponent implements OnInit, OnChanges {
         for (let obj in response.body.Note) {
           this.singleNoteData[obj] = response.body.Note[obj]
         }
+
         console.log(this.singleNoteData);
         this.notesService.notesSubject.next({
           singleNoteData: this.singleNoteData,
           newNote: 0
         })
+        this.alertService.success(response.body.message)
 
       }
 

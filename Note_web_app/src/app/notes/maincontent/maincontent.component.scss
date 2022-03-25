@@ -26,6 +26,12 @@
     border-bottom: 1px solid grey;
   }
 }
+
+#font-styling {
+  white-space: pre-wrap;
+  max-height: 50vh;
+  overflow: auto;
+}
 .content-body {
   min-height: 50vh; // also check the height and min-height
 }
@@ -35,6 +41,7 @@
   justify-content: space-between;
   // align-items: center;
 }
+
 .notes-form {
   textarea {
     height: 300px;

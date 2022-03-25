@@ -42,4 +42,10 @@ export class NotesService {
     return this.http.post(`${env.BASE_URL}/notes`, body, { observe: 'response' });
   }
 
+  // delte note
+
+  deleteNote(noteid: string) {
+    return this.http.delete(`${env.BASE_URL}/notes/${noteid}`, { observe: 'response' })
+  }
+
 }

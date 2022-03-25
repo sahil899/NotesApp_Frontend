@@ -5,6 +5,7 @@ import { HttpInjectorInterceptor } from './interceptors/http-injector.intercepto
 import { AuthService } from './services/auth.service';
 import { EnsureModuleLoadedOnceGuard } from './ensure-module-loaded-once.guard';
 import { UserService } from './services/user.service';
+import { AlertModule } from './alert/alert.module';
 
 
 
@@ -13,6 +14,7 @@ import { UserService } from './services/user.service';
   imports: [
     CommonModule,
     HttpClientModule,
+    AlertModule
   ],
   providers: [AuthService, UserService,
     {
@@ -21,7 +23,9 @@ import { UserService } from './services/user.service';
       multi: true
     },
 
-  ]
+  ],
+  exports: [AlertModule]
+
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

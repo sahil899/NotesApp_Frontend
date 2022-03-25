@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/modals/user';
 import { passwordCheckerValidator } from '../password-checker-directive';
 import { UserService } from '../../core/services/user.service';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,7 +16,7 @@ export class RegistrationComponent implements OnInit {
   newUser: any;
 
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private alertService: AlertService) { }
 
 
   // excute before pageload
@@ -63,8 +64,12 @@ export class RegistrationComponent implements OnInit {
     // console.log(this.newUser)
     this.userService.register(this.newUser).subscribe((response: any) => {
       if (response.status == 201) {
+        this.alertService.success(response.body.message);
         this.router.navigate(['/user/signin'])
+
       }
+    }, (err) => {
+      this.alertService.error(err.error.message);
     })
   }
 
