@@ -1,0 +1,68 @@
+.main-content {
+  min-height: 80vh; // adjust the height and also check the min height
+  width: 70vw;
+  margin: 2rem auto;
+  padding: 0.5rem 2rem;
+  position: relative;
+  overflow-y: auto;
+}
+.btn {
+  &-h {
+    &:hover {
+      background-color: #ffffff;
+      mat-icon {
+        color: green;
+      }
+    }
+  }
+  &-location {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+  }
+}
+.notes-content {
+  &-heading {
+    border-bottom: 1px solid grey;
+  }
+}
+
+#font-styling {
+  white-space: pre-wrap;
+  max-height: 50vh;
+  overflow: auto;
+}
+.content-body {
+  min-height: 50vh; // also check the height and min-height
+}
+.notes-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // align-items: center;
+}
+
+.notes-form {
+  textarea {
+    height: 300px;
+  }
+  mat-form-field {
+    margin-top: 1rem;
+  }
+  mat-error {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .btn-submit {
+    width: 150px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    padding: 10px;
+    color: #ffffff;
+    background-color: #00a82d;
+  }
+  .btn-submit:hover {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,45 @@
+<ng-container *ngIf="activateSpinner">
+    <mat-progress-spinner class="spinner-loader" mode='indeterminate' color='accent'></mat-progress-spinner>
+
+
+</ng-container>
+<ng-container *ngIf="!activateSpinner">
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav class="sidenavstyle mat-elevation-z15" [opened]="!smallSize"
+            [mode]="smallSize?'over':'side'">
+            <mat-toolbar color="primary">
+                <!-- <mat-icon *ngIf="smallSize" (click)="sidenav.close()">close</mat-icon> -->
+
+                Notes
+            </mat-toolbar>
+            <mat-list role="list">
+                <ng-container *ngFor="let note of NotesData">
+                    <div class="note-list">
+
+                        <a mat-list-item role="listitem" routerLink='NS' [queryParams]="{'obj':note._id}">{{note.title |
+                            truncate}}</a>
+                        <button mat-icon-button (click)="deleteNote(note._id)" class="del-button">
+                            <mat-icon color="warn">delete</mat-icon>
+                        </button>
+                    </div>
+
+                </ng-container>
+                <button mat-raised-button color="primary" class="add-notes-button" routerLink='NS'
+                    [queryParams]="{'obj':'newNote'}">
+                    <mat-icon>add</mat-icon> Note
+                </button>
+
+            </mat-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <app-toolbar [collapsed]="smallSize" (menu)="sidenav.toggle() "></app-toolbar>
+            <div class="wrapper">
+                <router-outlet></router-outlet>
+
+            </div>
+        </mat-sidenav-content>
+
+
+    </mat-sidenav-container>
+</ng-container>

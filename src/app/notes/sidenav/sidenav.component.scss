@@ -1,0 +1,45 @@
+.sidenav {
+  &-container {
+    height: 100%;
+  }
+}
+.sidenavstyle {
+  width: 20vw;
+  min-width: 150px;
+  border: 2px transparent;
+}
+.matIcon {
+  margin-right: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  background-color: rgba(128, 128, 128, 0.637);
+}
+.add-notes-button {
+  margin-left: 10px;
+}
+.note-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  margin: 0 10px 0 0;
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.637);
+    .del-button {
+      display: inline;
+      background-color: transparent;
+    }
+  }
+}
+.del-button {
+  display: none;
+}
+@media screen and(max-width:720px) {
+  .note-list {
+    flex-wrap: wrap;
+    margin: 10px 0 10px 0;
+  }
+}
