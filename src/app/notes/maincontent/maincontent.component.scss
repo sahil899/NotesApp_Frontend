@@ -1,6 +1,6 @@
 .main-content {
   min-height: 80vh; // adjust the height and also check the min height
-  width: 70vw;
+  max-width: 70vw;
   margin: 2rem auto;
   padding: 0.5rem 2rem;
   position: relative;
@@ -44,7 +44,7 @@
 
 .notes-form {
   textarea {
-    height: 300px;
+    height: 40%;
   }
   mat-form-field {
     margin-top: 1rem;
@@ -64,5 +64,10 @@
   }
   .btn-submit:hover {
     cursor: pointer;
+  }
+}
+@media screen and (max-width: 720px) {
+  .main-content {
+    max-width: 90vw;
   }
 }

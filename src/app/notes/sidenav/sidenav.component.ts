@@ -1,4 +1,5 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import { Router } from '@angular/router';
@@ -18,6 +19,8 @@ export class SidenavComponent implements OnInit, OnDestroy {
   NotesData: any = {}
   subcription$1: Subscription;
   activateSpinner: boolean = false;
+  isActive: boolean;
+
   constructor(private breakpoint: BreakpointObserver, private noteService: NotesService, private router: Router, private alertService: AlertService) { }
 
   ngOnInit(): void {
@@ -25,13 +28,14 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
     this.activateSpinner = true;
 
-
     // collapsing the sidenav in mobile view
     this.breakpoint.observe([`(max-width:${BREAK_POINT}px)`]).subscribe((state: BreakpointState) => {
       if (state.matches == true) {
         this.smallSize = true;
+        this.isActive = false;
       } else {
         this.smallSize = false;
+        this.isActive = true;
       }
     })
 

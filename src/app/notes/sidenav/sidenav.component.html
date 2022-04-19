@@ -4,8 +4,8 @@
 
 </ng-container>
 <ng-container *ngIf="!activateSpinner">
-    <mat-sidenav-container class="sidenav-container">
-        <mat-sidenav #sidenav class="sidenavstyle mat-elevation-z15" [opened]="!smallSize"
+    <mat-sidenav-container>
+        <mat-sidenav #sidenav class="sidenavstyle" [class.mat-elevation-z15]="isActive" [opened]="!smallSize"
             [mode]="smallSize?'over':'side'">
             <mat-toolbar color="primary">
                 <!-- <mat-icon *ngIf="smallSize" (click)="sidenav.close()">close</mat-icon> -->
@@ -13,7 +13,7 @@
                 Notes
             </mat-toolbar>
             <mat-list role="list">
-                <ng-container *ngFor="let note of NotesData">
+                <ng-container class="sidenav-container" *ngFor="let note of NotesData">
                     <div class="note-list">
 
                         <a mat-list-item role="listitem" routerLink='NS' [queryParams]="{'obj':note._id}">{{note.title |
